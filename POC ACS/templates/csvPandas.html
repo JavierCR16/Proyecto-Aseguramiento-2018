@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <title>Generación de CSV</title>
+</head>
+<body>
+    <form action = "cambioPantalla" method="post">
+    <div>
+   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Segmentación de Células</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+      
+       <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Proof of Concept
+      </a>
+      <div class="dropdown-menu">
+          <button name = "cambiar" type="submit" value="imagen" class="dropdown-item">Cargar y Guardar una Imagen</button>
+          <button name = "cambiar" type="submit" value="csv"    class="dropdown-item">Generar CSV</button>
+          <button name = "cambiar" type="submit" value="keras"  class="dropdown-item">Cargar un Modelo de Keras</button>    
+      </div>
+    </li>
+  </ul>
+</nav>
+    </div>
+    </form>
+    
+<div class="w3-container w3-teal">
+  <h2>Registro de Objetos</h2>
+</div>
+
+<form action="registrarPersonas" class="w3-container" method="post">
+  <label class="w3-text-teal"><b>Numero del Objeto</b></label>
+  <input name = "numero" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Centroide</b></label>
+  <input name = "centroide" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+    
+  <label class="w3-text-teal"><b>Area</b></label>
+  <input name = "area" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <button style="margin-top: 30px" class="w3-btn w3-blue-grey">Registrar</button>
+     
+</form>
+    <form action = 'generarCSV' class="w3-container" method="post">
+         <button style="margin-top: 30px" class="w3-btn w3-blue-grey">Generar CSV</button>
+    </form>
+</body>
+</html>

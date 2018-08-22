@@ -1,8 +1,9 @@
 '''
 Created on Aug 19, 2018
 
-@author: Javier
+@author: Javier 
 '''
+#Comentario Prueba
 from flask import Flask, render_template, request,session,redirect, url_for
 
 from Gestores import gestorCSV,gestorImagenes

@@ -17,11 +17,15 @@ from collections import namedtuple
 #  Se encarga de agrupar los datos, que provienen en diccionarios, en tres categorias las cuales seran cargadas en un archivo CSV
 #  \param listaObjetos Es una lista de diccionarios y cada diccionario contiene los atributos de area, centroide e identificacion
 #  \return Nada
-def registroObjetos(listaObjetos):
-    listaIdentificacion= [d["identificacion"] for d in listaObjetos ]
-    listaCentroide= [d["centroide"] for d in listaObjetos]
-    listaArea = [d["area"] for d in listaObjetos]
-    diccionario = {'Numero':listaIdentificacion,'Centroide': listaCentroide,'Area': listaArea}
-    
-    datos = pandas.DataFrame(diccionario)
-    datos.to_csv('CSV/listaObjetos.csv')
+def registroObjetos(listaObjetos, directorio):
+    try:
+        listaIdentificacion= [d["identificacion"] for d in listaObjetos ]
+        listaCentroide= [d["centroide"] for d in listaObjetos]
+        listaArea = [d["area"] for d in listaObjetos]
+        diccionario = {'Identificacion':listaIdentificacion,'Centroide': listaCentroide,'Area': listaArea}
+        
+        datos = pandas.DataFrame(diccionario)
+        datos.to_csv(directorio)
+        return True
+    except:
+        return False

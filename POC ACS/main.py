@@ -65,8 +65,8 @@ def registrarPersonas():
 #  Se encarga de llamar a la funcion almacenada en el modulo de manejo de CSV
 #  \return Comando para visualizar la pagina de generacion del CSV
 def generarCSV():
-    print(session['listaObjetos'])
-    gestorCSV.registroObjetos(session['listaObjetos'])
+
+    gestorCSV.registroObjetos(session['listaObjetos'],'../CSV/listaObjetos.csv')
 
     return render_template("csvPandas.html")
 

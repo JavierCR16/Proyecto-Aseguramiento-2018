@@ -1,9 +1,5 @@
-'''
-Created on Aug 19, 2018
 
-@author: Javier 
-'''
-#Comentario Prueba
+
 from flask import Flask, render_template, request,session,redirect, url_for
 
 from Gestores import gestorCSV,gestorImagenes
@@ -13,15 +9,18 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.secret_key = "something-from-os.urandom(24)"
+
    
 
 def setVariablesDeSesion():
+   
+
     session['listaObjetos'] = []
     
 @app.route('/')
 def main():
     setVariablesDeSesion()
-    return render_template('csvPandas.html') #Aqui se debe cambiar por la pantalla de inicio
+    return render_template('csvPandas.html') 
 
 @app.route('/cambioPantalla', methods = ['POST'])
 def cambioPantalla():
@@ -47,7 +46,7 @@ def registrarPersonas():
     
     return render_template("csvPandas.html")
 
-@app.route('/generarCSV', methods = ['POST'])    
+@app.route('/generarCSV', methods = ['POST'])
 def generarCsv():
     
     gestorCSV.registroObjetos(session['listaObjetos'])

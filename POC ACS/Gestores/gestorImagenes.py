@@ -17,5 +17,10 @@ import numpy as np
 #  \param directorioArchivo Contiene el directorio de salida asi como el nombre de la imagen a guardar
 #  \return Nada
 def guardarImagen(nombreArchivo,directorioArchivo):
-   imagenNueva= Image.fromarray(np.asarray(Image.open(nombreArchivo)))  
-   imagenNueva.save(directorioArchivo)
+    try:
+        imagenNueva= Image.fromarray(np.asarray(Image.open(nombreArchivo)))  
+        imagenNueva.save(directorioArchivo)
+        return True
+    except Exception as e:
+        print(e)
+        return False

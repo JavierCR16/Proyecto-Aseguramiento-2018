@@ -4,8 +4,9 @@ Created on Aug 23, 2018
 @author: Javier
 '''
 import unittest
-from Gestores import gestorCSV
+from Gestores import gestorCSV,gestorImagenes
 from Gestores.gestorCSV import registroObjetos
+from Gestores.gestorImagenes import  guardarImagen
 
 class SimpleTestCase(unittest.TestCase):
     
@@ -23,5 +24,12 @@ class SimpleTestCase(unittest.TestCase):
 
         self.assertTrue(registroObjetos(listaDatos,'../CSV/listaObjetos.csv'))
         
+    
+    def test_imagenyDirectorioInexistente(self):#,fuente,archivo
+        nombreArchivo= "../static/Whales-Tail-Uvita.jpg"
+        outputDirectory="../static/hola.jpg"
+        self.assertTrue(guardarImagen(nombreArchivo,outputDirectory))
+        
+ 
 if __name__ == "__main__":
         unittest.main() 

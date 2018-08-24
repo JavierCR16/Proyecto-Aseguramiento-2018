@@ -1,5 +1,5 @@
 ## \package Gestores
-#  Módulo que contiene funciones de carga y guardado de modelos de aprendizaje, mediante el uso de la librería Keras
+#  Modulo que contiene funciones de carga y guardado de modelos de aprendizaje, mediante el uso de la libreria Keras
 #
 
 from keras.models import Sequential, Model
@@ -10,14 +10,14 @@ import os
 
 ## Descripcion de la funcion guardarModelo
 #
-#  Toma los parámetros dados por el usuario, crea un modelo en base a ellos, y guarda tal modelo en un archivo .JSON
-#  \param model_name Define el nombre del modelo, así como los archivos
-#  \param filter_number Número de filtros utilizados por el modelo
+#  Toma los parametros dados por el usuario, crea un modelo en base a ellos, y guarda tal modelo en un archivo .JSON
+#  \param model_name Define el nombre del modelo, asi como los archivos
+#  \param filter_number Numero de filtros utilizados por el modelo
 #  \param shape_tuple Tupla de valores donde se define la forma
-#  \param str_activation Define el modo de activación del modelo (relu, sigmoid, softmax, etc.)
+#  \param str_activation Define el modo de activacion del modelo (relu, sigmoid, softmax, etc.)
 #  \param optim Describe el optimizador para compilar el modelo (usualmente rmsprop)
-#  \param loss_function Define la función de pérdida (binaria, múltiple)
-#  \param b_size Asigna los tamaños para los batches
+#  \param loss_function Define la funcion de perdida (binaria, multiple)
+#  \param b_size Asigna los tamanos para los batches
 #  \return Nada
 
 def guardarModelo(model_name, filter_number, shape_tuple, str_activation, optim, loss_function, num_epochs, b_size):

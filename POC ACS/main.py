@@ -83,11 +83,13 @@ def guardarImagen():
     
     return render_template("imagen.html")
 
+@app.route('/cargarModelo', methods = ['POST']) 
 def cargarModelo():
     gestorKeras.cargarModelo()
     
     return render_template("modeloKeras.html")
-    
+
+@app.route('/guardarModelo', methods = ['POST'])    
 def guardarModelo():
     __model_name = request.form.get("model_name")
     __filter_number = request.form.get("filter_number")

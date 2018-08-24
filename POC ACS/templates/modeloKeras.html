@@ -51,23 +51,26 @@
   <input name = "shape_tuple" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
     
   <label class="w3-text-teal"><b>Activacion</b></label>
-  <select name = "str_activation">
-	<option value = "relu"></option>
-	<option value = "sigmoid"></option>
-	<option value = "softmax"></option>
+  <br>
+  <select id = "str_activation" name = "str_activation" style="width: 200px">
+	<option value = "relu">relu</option>
+	<option value = "sigmoid">sigmoid</option>
+	<option value = "softmax">softmax</option>
   </select>
-
+  <br>
   <label class="w3-text-teal"><b>Optimizador</b></label>
-  <select name = "optim">
-	<option value = "rmsprop"></option>
+  <br>
+  <select id = "optim" name = "optim" style="width: 200px">
+	<option value = "rmsprop">rmsprop</option>
   </select>
-
+  <br>
   <label class="w3-text-teal"><b>Funcion de perdida</b></label>
-  <select name = "loss_function">
-	<option value = "binary_crossentropy"></option>
-	<option value = "categorical_crossentropy"></option>
+  <br>
+  <select id = "loss_function" name = "loss_function" style="width: 200px">
+	<option value = "binary_crossentropy">binary_crossentropy</option>
+	<option value = "categorical_crossentropy">categorical_crossentropy</option>
   </select>
-
+  <br>
   <label class="w3-text-teal"><b>Numero de epocas</b></label>
   <input name = "num_epochs" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="number">
 

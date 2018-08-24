@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,session,redirect, url_for
 
-from Gestores import gestorCSV,gestorImagenes
+from Gestores import gestorCSV, gestorImagenes, gestorKeras
 from Modelos.ModeloObjeto import *
 
 
@@ -82,6 +82,24 @@ def guardarImagen():
     gestorImagenes.guardarImagen(nombreArchivo,__directorioArchivo)
     
     return render_template("imagen.html")
+
+def cargarModelo():
+    gestorKeras.cargarModelo()
+    
+    return render_template("modeloKeras.html")
+    
+def guardarModelo():
+    __model_name = request.form.get("model_name")
+    __filter_number = request.form.get("filter_number")
+    __shape_tuple = request.form.get("shape_tuple")
+    __str_activation = request.form.get("str_activation")
+    __optim = request.form.get("optim")
+    __loss_function = request.form.get("loss_function")
+    __num_epochs = request.form.get("num_epochs")
+    __b_size = request.form.get("b_size")
+    gestorKeras.guardarModelo(__model_name, __filter_number, __shape_tuple, __str_activation, __optim, __loss_function, __num_epochs, __b_size)
+ 
+    return render_template("modeloKeras.html")
 
 if __name__ == '__main__':
 

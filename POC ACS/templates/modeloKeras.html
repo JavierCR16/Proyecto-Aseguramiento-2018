@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	  <title>Modelos de Keras</title>
+	</head>
+<body>
+    <form action = "cambioPantalla" method="post">
+    <div>
+   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Segmentacion de Celulas</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+      
+       <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Proof of Concept
+      </a>
+      <div class="dropdown-menu">
+          <button name = "cambiar" type="submit" value="imagen" class="dropdown-item">Cargar y Guardar una Imagen</button>
+          <button name = "cambiar" type="submit" value="csv"    class="dropdown-item">Generar CSV</button>
+          <button name = "cambiar" type="submit" value="keras"  class="dropdown-item">Cargar un Modelo de Keras</button>    
+      </div>
+    </li>
+  </ul>
+</nav>
+    </div>
+    </form>
+    
+<div class="w3-container w3-teal">
+  <h2>Guardar un modelo</h2>
+</div>
+
+<form action="guardarModelo" class="w3-container" method="post">
+
+  <label class="w3-text-teal"><b>Nombre del modelo</b></label>
+  <input name = "model_name" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Número de filtros</b></label>
+  <input name = "filter_number" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Forma del input</b></label>
+  <input name = "shape_tuple" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+    
+  <label class="w3-text-teal"><b>Activacion</b></label>
+  <input name = "str_activation" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Optimizador</b></label>
+  <input name = "optim" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Funcion de perdida</b></label>
+  <input name = "loss_function" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Numero de epocas</b></label>
+  <input name = "num_epochs" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <label class="w3-text-teal"><b>Tamano del batch</b></label>
+  <input name = "b_size" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <button style="margin-top: 30px" class="w3-btn w3-blue-grey">Guardar</button>
+</form>
+
+<br>
+     
+<div class="w3-container w3-teal">
+  <h2>Cargar un modelo</h2>
+</div>
+
+<form action="cargarModelo" class="w3-container" method="post">
+  <label class="w3-text-teal"><b>Nombre del modelo (no incluir extension)</b></label>
+  <input name = "name" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+
+  <button style="margin-top: 30px" class="w3-btn w3-blue-grey">Cargar</button>
+</form>
+
+     
+</body>
+</html>

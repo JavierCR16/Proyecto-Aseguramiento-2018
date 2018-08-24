@@ -16,6 +16,7 @@ from collections import namedtuple
 #
 #  Se encarga de agrupar los datos, que provienen en diccionarios, en tres categorias las cuales seran cargadas en un archivo CSV
 #  \param listaObjetos Es una lista de diccionarios y cada diccionario contiene los atributos de area, centroide e identificacion
+#  \param directorio Es el directorio de salida en donde se va a generar el CSV
 #  \return Nada
 def registroObjetos(listaObjetos, directorio):
     try:

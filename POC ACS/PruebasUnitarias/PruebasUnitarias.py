@@ -4,9 +4,10 @@ Created on Aug 23, 2018
 @author: Javier
 '''
 import unittest
-from Gestores import gestorCSV,gestorImagenes
+from Gestores import gestorCSV,gestorImagenes, gestorKeras
 from Gestores.gestorCSV import registroObjetos
-from Gestores.gestorImagenes import  guardarImagen
+from Gestores.gestorImagenes import guardarImagen
+from Gestores.gestorKeras import cargarModelo, guardarModelo
 ## \package Pruebas Unitarias
 #  Contiene las pruebas necesarias para validar el sistema
 #

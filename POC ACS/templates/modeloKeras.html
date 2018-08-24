@@ -45,25 +45,34 @@
   <input name = "model_name" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
 
   <label class="w3-text-teal"><b>Numero de filtros</b></label>
-  <input name = "filter_number" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <input name = "filter_number" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="number">
 
   <label class="w3-text-teal"><b>Forma del input</b></label>
   <input name = "shape_tuple" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
     
   <label class="w3-text-teal"><b>Activacion</b></label>
-  <input name = "str_activation" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <select name = "str_activation">
+	<option value = "relu"></option>
+	<option value = "sigmoid"></option>
+	<option value = "softmax"></option>
+  </select>
 
   <label class="w3-text-teal"><b>Optimizador</b></label>
-  <input name = "optim" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <select name = "optim">
+	<option value = "rmsprop"></option>
+  </select>
 
   <label class="w3-text-teal"><b>Funcion de perdida</b></label>
-  <input name = "loss_function" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <select name = "loss_function">
+	<option value = "binary_crossentropy"></option>
+	<option value = "categorical_crossentropy"></option>
+  </select>
 
   <label class="w3-text-teal"><b>Numero de epocas</b></label>
-  <input name = "num_epochs" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <input name = "num_epochs" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="number">
 
   <label class="w3-text-teal"><b>Tamano del batch</b></label>
-  <input name = "b_size" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="text">
+  <input name = "b_size" style ="width: 10cm" class="w3-input w3-border w3-light-grey" type="number">
 
   <button style="margin-top: 30px" class="w3-btn w3-blue-grey">Guardar</button>
 </form>

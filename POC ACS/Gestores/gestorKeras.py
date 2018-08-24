@@ -1,8 +1,24 @@
+## \package Gestores
+#  Módulo que contiene funciones de carga y guardado de modelos de aprendizaje, mediante el uso de la librería Keras
+#
+
 from keras.models import Sequential, Model
 from keras.layers import Input, Dense, Activation
 from keras.models import model_from_json
 import numpy as np
 import os
+
+## Descripcion de la funcion guardarModelo
+#
+#  Toma los parámetros dados por el usuario, crea un modelo en base a ellos, y guarda tal modelo en un archivo .JSON
+#  \param model_name Define el nombre del modelo, así como los archivos
+#  \param filter_number Número de filtros utilizados por el modelo
+#  \param shape_tuple Tupla de valores donde se define la forma
+#  \param str_activation Define el modo de activación del modelo (relu, sigmoid, softmax, etc.)
+#  \param optim Describe el optimizador para compilar el modelo (usualmente rmsprop)
+#  \param loss_function Define la función de pérdida (binaria, múltiple)
+#  \param b_size Asigna los tamaños para los batches
+#  \return Nada
 
 def guardarModelo(model_name, filter_number, shape_tuple, str_activation, optim, loss_function, num_epochs, b_size):
     try:
@@ -31,6 +47,12 @@ def guardarModelo(model_name, filter_number, shape_tuple, str_activation, optim,
     except:
         return False
     
+## Descripcion de la funcion cargarModelo
+#
+#  En base a un nombre de archivo, busca el JSON del modelo junto con los pesos y los carga a memoria
+#  \param model_name Indica el nombre del modelo, y por ende los archivos
+#  \return Nada
+
 def cargarModelo(name):
     try:
         model_name = name + ".json"

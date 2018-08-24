@@ -46,6 +46,30 @@ class SimpleTestCase(unittest.TestCase):
         outputDirectory="../static/hola.jpg"
         self.assertTrue(guardarImagen(nombreArchivo,outputDirectory))
         
+## Descripcion de la funcion test_datosValidosModelo
+#
+#  Se encarga de verificar que los datos necesarios para el modelo sean válidos para cada espacio respectivo
+#  \return Nada
+    def test_DatosValidosModelo(self):
+        nombre = "modelo_test"
+        num_filtros = 32
+        forma = (100,)
+        activacion = "relu"
+        optimizador = "rmsprop"
+        perdida = "binary_crossentropy" 
+        epocas = 100 
+        tam_batch = 32
+        self.assertTrue(guardarModelo(nombre, num_filtros, forma, activacion, optimizador, perdida, epocas, tam_batch))
+        
+## Descripcion de la funcion test_nombreModeloExistente
+#
+#  Comprueba si el nombre de un modelo existe como archivo o no
+#  \return Nada
+    def test_nombreModeloExistente(self):
+        nombre = "noExisto"
+        self.assertTrue(cargarModelo(nombre))
+        nombre = "modelo"
+        self.assertTrue(cargarModelo(nombre))
  
 if __name__ == "__main__":
         unittest.main() 

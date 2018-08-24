@@ -84,7 +84,8 @@ def guardarImagen():
     return render_template("imagen.html")
 
 def cargarModelo():
-    gestorKeras.cargarModelo()
+    __name = request.form.get("name")
+    gestorKeras.cargarModelo(__name)
     
     return render_template("modeloKeras.html")
     

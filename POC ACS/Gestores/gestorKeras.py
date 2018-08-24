@@ -20,6 +20,11 @@ def guardarModelo(model_name, filter_number, shape_tuple, str_activation, optim,
     
         model.fit(data, labels, epochs = num_epochs, batch_size = b_size)
     
+        model_json = model.to_json()
+        str_name = model_name + ".json"
+        with open(str_name, "w") as json_file:
+            json_file.write(model_json)
+
         str_name = model_name + ".h5"
         model.save_weights(str_name)
         return True
@@ -28,17 +33,23 @@ def guardarModelo(model_name, filter_number, shape_tuple, str_activation, optim,
     
 def cargarModelo(name):
     try:
+        model_name = name + ".json"
+        json_file = open(model_name, 'r')
+        modelo_cargado_json = json_file.read()
+        json_file.close()
+        modelo_cargado = model_from_json(modelo_cargado_json)
+
         model_name = name + ".h5"
-        loaded_model.load_weights(model_name)
+        modelo_cargado.load_weights(model_name)
         print("Modelo cargado")
      
-        loaded_model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+        modelo_cargado.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
         
         data = np.random.random((1000, 100))
         labels = np.random.randint(2, size=(1000, 10))
     
-        score = loaded_model.evaluate(data, labels, verbose=0)
-        print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+        score = modelo_cargado.evaluate(data, labels, verbose=0)
+        print("%s: %.2f%%" % (modelo_cargado.metrics_names[1], score[1]*100))
         return True
     except:
         return False

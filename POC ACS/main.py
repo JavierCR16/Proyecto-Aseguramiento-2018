@@ -72,7 +72,7 @@ def generarCSV():
 
 @app.route('/guardarImagen', methods = ['POST'])
 
-## Descripcion de la funcion generarCSV
+## Descripcion de la funcion guardarImagen
 #
 #  Se encarga de recibir la imagen seleccionada por el usuario y la almacena en el directorio de salida especificado
 #  \return Comando para visualizar la pagina de cargado y guardado de imagenes
@@ -84,8 +84,7 @@ def guardarImagen():
     return render_template("imagen.html")
 
 def cargarModelo():
-    __name = request.form.get("name")
-    gestorKeras.cargarModelo(__name)
+    gestorKeras.cargarModelo()
     
     return render_template("modeloKeras.html")
     

@@ -58,10 +58,15 @@
  <div style= "margin-top: 20px"  class="w3-container">    
     <form action = "guardarImagen" method=post enctype=multipart/form-data>
       <p><input accept=".png,.jpg" type=file name=file onchange="readURL(this)">
+          
         <div style ="max-width: 500px" >
-          <input style = "margin-top: 5px"type=submit value=Upload>
-          <input type = text style = "width: 10cm; float:right" class="w3-input w3-border w3-light-grey" name = directorioArchivo>
-          </div>  
+          <input style = "margin-top: 35px" type=submit  value=Upload>
+            <div style = "float:right">
+                <label>Directorio de Salida</label>
+                <input type = text style = "width: 10cm" class="w3-input w3-border w3-light-grey" name = directorioArchivo>
+            </div>
+        </div>  
+        
     </form>
     
     <img style = "max-width:400px; margin-left: 3cm; margin-top: 2cm" id="imagenCargada"/>

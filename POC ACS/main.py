@@ -85,7 +85,7 @@ def guardarImagen():
 
 @app.route('/cargarModelo', methods = ['POST']) 
 def cargarModelo():
-    gestorKeras.cargarModelo()
+    gestorKeras.cargarModelo(request.form.get("name"))
     
     return render_template("modeloKeras.html")
 

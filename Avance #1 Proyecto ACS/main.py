@@ -10,6 +10,14 @@ def main():
     
     return render_template('cargadoDeImagenes.html') 
 
+@app.route('/cambioPantalla', methods = ['POST'])
+def cambioPantalla():
+    print("picha")
+    valorBoton = request.form.get("cambiar")
+
+    if(valorBoton == "imagenes"):
+        return render_template('cargadoDeImagenes.html')
+
 @app.route('/cargarImagenes', methods = ['POST'])
 def cargarImagenes():
     
@@ -20,4 +28,4 @@ def cargarImagenes():
 
 if __name__ == '__main__':
 
-    app.run(host= '0.0.0.0')
+    app.run(debug=True)

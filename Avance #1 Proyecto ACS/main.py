@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request,session,redirect, url_for
 from Gestores import GestorImagenes
+
+
 app = Flask(__name__)
 app.secret_key = "something-from-os.urandom(24)"
-
 
 @app.route('/')
 def main():
@@ -19,4 +20,4 @@ def cargarImagenes():
 
 if __name__ == '__main__':
 
-    app.run(debug=True)
+    app.run(host= '0.0.0.0')

@@ -12,7 +12,6 @@ def main():
 
 @app.route('/cambioPantalla', methods = ['POST'])
 def cambioPantalla():
-    print("picha")
     valorBoton = request.form.get("cambiar")
 
     if(valorBoton == "imagenes"):

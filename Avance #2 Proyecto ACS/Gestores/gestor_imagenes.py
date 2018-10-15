@@ -4,7 +4,6 @@ Created on Sep 9, 2018
 @author: Javier
 '''
 import os
-import shutil
 import traceback
 from PIL import Image
 import numpy as np
@@ -38,7 +37,7 @@ class GestorImagenes:
                 path_imagen = directorio_imagenes+"/"+file
                 arreglo_imagen = np.asarray(Image.open(path_imagen))
                 imagen_nueva = Image.fromarray(arreglo_imagen)
-                self.lista_nombres.append(file)
+                self.lista_nombres.append(str(num_img)+'.png')
                 imagen_nueva.save(directorio_temporal+str(num_img)+'.png')
                 GestorImagenes.guardar_en_segmentacion(imagen_nueva, num_img)
                 num_img += 1
@@ -48,12 +47,11 @@ class GestorImagenes:
             traceback.print_exc()
             return False
 
-    def copiar_preds_static(self, directorio_preds):
+    def obtener_nombre_preds(self, directorio_preds):
         """
         Docstring
         """
         for file in os.listdir(directorio_preds):
-            shutil.copy(file, '/static')
             self.lista_preds.append(file)
 
         return self.lista_preds

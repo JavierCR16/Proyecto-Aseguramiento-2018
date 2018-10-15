@@ -174,8 +174,8 @@ def predict():
         image_pred = image_pred[:, :, 0]
         image_pred[image_pred > 0.5] *= 255.
         im = Image.fromarray(image_pred.astype(np.uint8))
-        im.save(os.path.join(pred_dir, str(test_id[index]) + '_pred.png'))
+        im.save(os.path.join(pred_dir, str(test_id[index]) + '-pred.png'))
+        im.save('static/'+ str(test_id[index]) + '-pred.png') # Agregado
 
 #if __name__ == '__main__':
  #   predict()
-    

@@ -15,7 +15,6 @@ APP.secret_key = "something-from-os.urandom(24)"
 def main():
     """"
     Docstring
-
     """
     return render_template('cargadoDeImagenes.html')
 
@@ -24,7 +23,6 @@ def main():
 def cambio_pantalla():
     """"
     Docstring
-
     """
 
     valor_boton = request.form.get("cambiar")
@@ -39,7 +37,6 @@ def cambio_pantalla():
 def cargar_imagenes():
     """"
     Docstring
-
     """
 
     __directorio_imagenes = request.form.get("directorioArchivos")
@@ -56,3 +53,4 @@ def cargar_imagenes():
 if __name__ == '__main__':
 
     APP.run(debug=True)
+    

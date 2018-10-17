@@ -19,15 +19,14 @@ class GestorImagenes:
         self.lista_preds = []
 
     @staticmethod
-    def guardar_en_segmentacion(imagen, numero_imagen):
+    def guardar_en_segmentacion(imagen, numero_imagen, path_test ):
         """
         Docstring
         """
-        imagen.save('../Avance #2 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/' +
-                    str(numero_imagen) + '.png')
+        imagen.save(path_test + str(numero_imagen) + '.png')
 
     def obtener_imagenes(self, directorio_imagenes,
-                         directorio_temporal='static/'):
+                         directorio_temporal='static/', path_test = '../Avance #2 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'):
         """
         Docstring
         """
@@ -39,7 +38,7 @@ class GestorImagenes:
                 imagen_nueva = Image.fromarray(arreglo_imagen)
                 self.lista_nombres.append(str(num_img)+'.png')
                 imagen_nueva.save(directorio_temporal+str(num_img)+'.png')
-                GestorImagenes.guardar_en_segmentacion(imagen_nueva, num_img)
+                GestorImagenes.guardar_en_segmentacion(imagen_nueva, num_img, path_test)
                 num_img += 1
 
             return self.lista_nombres

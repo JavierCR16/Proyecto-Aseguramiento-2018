@@ -37,6 +37,7 @@ image_path = '../Avance #2 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/*.p
 weights_path = '../Avance #2 Proyecto ACS/SegmentacionCelulas/weights/pre_0_3_5.h5'
 pred_dir = '../Avance #2 Proyecto ACS/SegmentacionCelulas/preds/'
 file_path = '../Avance #2 Proyecto ACS/SegmentacionCelulas/imgs_mask_predict.npy'
+static_path = 'static/'
 
 #Compute dice coeficient used in loss function
 def dice_coef(y_true, y_pred):
@@ -175,7 +176,7 @@ def predict():
         image_pred[image_pred > 0.5] *= 255.
         im = Image.fromarray(image_pred.astype(np.uint8))
         im.save(os.path.join(pred_dir, str(test_id[index]) + '-pred.png'))
-        im.save('static/'+ str(test_id[index]) + '-pred.png') # Agregado
+        im.save(static_path + str(test_id[index]) + '-pred.png') # Agregado
 
 #if __name__ == '__main__':
  #   predict()

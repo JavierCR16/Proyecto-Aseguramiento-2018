@@ -1,0 +1,11 @@
+#carrusel{
+width: 550px; height:410px; margin-top: 1cm; margin-left:2cm;
+float:left;
+}
+
+#carrusel2{
+	width: 550px; height:410px;
+	float:right;
+	margin-top:1cm;
+	margin-right:3cm;
+}

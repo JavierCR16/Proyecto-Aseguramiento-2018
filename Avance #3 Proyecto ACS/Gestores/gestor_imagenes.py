@@ -28,7 +28,7 @@ class GestorImagenes:
         imagen.save(path_test + str(numero_imagen) + '.png')
 
     def obtener_imagenes(self, directorio_imagenes,
-                         directorio_temporal='static/', path_test = '../Avance #2 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'):
+                         directorio_temporal='static/', path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'):
         """
         Docstring
         """
@@ -58,9 +58,10 @@ class GestorImagenes:
         return self.lista_preds
     
     def eliminar_directorios(self):
-        path_preds = '../Avance #2 Proyecto ACS/SegmentacionCelulas/preds'
-        path_test = '../Avance #2 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'
-        path_resultados = '../Avance #2 Proyecto ACS/SegmentacionCelulas/resultados/'
+        path_preds = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
+        path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'
+        path_resultados = '../Avance #3 Proyecto ACS/SegmentacionCelulas/resultados/'
+        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
         path_static = "static/"
         static_files = os.listdir(path_static)
         
@@ -75,6 +76,10 @@ class GestorImagenes:
             shutil.rmtree(path_resultados)
             os.makedirs(path_resultados)
             
+        if os.path.exists(path_coloreadas):
+            shutil.rmtree(path_coloreadas)
+            os.makedirs(path_coloreadas)
+            
         for file in static_files:
             if file.endswith(".png"):
                 os.remove(os.path.join(path_static,file))
@@ -85,7 +90,7 @@ class GestorImagenes:
         self.lista_nombres = sorted(self.lista_nombres)
         self.lista_preds = sorted(self.lista_preds)
         static_path = 'static/'
-        path_resultados = '../Avance #2 Proyecto ACS/SegmentacionCelulas/resultados/'
+        path_resultados = '../Avance #3 Proyecto ACS/SegmentacionCelulas/resultados/'
         contador = 1
         
         for i in range (0, len(self.lista_nombres)):
@@ -111,3 +116,23 @@ class GestorImagenes:
             
             imagen_nueva.save(path_resultados+'resultado'+str(contador)+'.png')
             contador += 1
+    
+    def colorearImagenes(self):
+        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
+        path_static = 'static/'
+        contador = 1
+        for i in range (0, len(self.lista_preds)):
+            imagen_a_colorear = Image.open(path_static + self.lista_preds[i])
+            imagen_a_colorear = imagen_a_colorear.convert('RGB')
+            width, height = imagen_a_colorear.size
+            arreglo_imagen = np.asarray(imagen_a_colorear)
+            
+            for ancho in range (0, width):
+                for altura in range(0, height):
+                    if arreglo_imagen[ancho][altura][0] != 0  or arreglo_imagen[ancho][altura][1] != 0 or arreglo_imagen[ancho][altura][2] != 0:
+                        imagen_a_colorear.putpixel((altura,ancho), (255,0,0))
+                        
+            imagen_a_colorear.save(path_coloreadas + 'predColor' +str(contador)+'.png')
+            contador += 1
+                        
+            

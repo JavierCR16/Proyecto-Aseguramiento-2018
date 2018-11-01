@@ -42,10 +42,10 @@ def cargar_imagenes():
     gestor_imagenes.eliminar_directorios()
     __directorio_imagenes = request.form.get("directorioArchivos")
     imagenes_nombres = sorted(gestor_imagenes.obtener_imagenes(__directorio_imagenes))
-    segmentador.predict()
-    path_pred = '../Avance #2 Proyecto ACS/SegmentacionCelulas/preds'
+    tiempos_imagenes,tiempo_total = segmentador.predict()  
+    path_pred = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
     imagenes_pred = sorted(gestor_imagenes.obtener_nombre_preds(path_pred))
-
+    gestor_imagenes.colorearImagenes()
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes=imagenes_nombres, nombresPred=imagenes_pred)
 

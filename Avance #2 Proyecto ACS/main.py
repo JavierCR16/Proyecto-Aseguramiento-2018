@@ -16,6 +16,8 @@ def main():
     """"
     Docstring
     """
+    gestor_imagenes = GestorImagenes()
+    gestor_imagenes.eliminar_directorios()
     return render_template('cargadoDeImagenes.html')
 
 
@@ -45,6 +47,7 @@ def cargar_imagenes():
     segmentador.predict()
     path_pred = '../Avance #2 Proyecto ACS/SegmentacionCelulas/preds'
     imagenes_pred = sorted(gestor_imagenes.obtener_nombre_preds(path_pred))
+    gestor_imagenes.guardar_en_archivos()
 
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes=imagenes_nombres, nombresPred=imagenes_pred)

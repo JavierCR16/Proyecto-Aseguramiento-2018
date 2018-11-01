@@ -78,6 +78,8 @@ class GestorImagenes:
         for file in static_files:
             if file.endswith(".png"):
                 os.remove(os.path.join(path_static,file))
+        self.lista_nombres.clear()
+        self.lista_preds.clear()
                 
     def guardar_en_archivos(self):
         self.lista_nombres = sorted(self.lista_nombres)

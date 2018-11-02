@@ -68,13 +68,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img  width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "Total de Células: {{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img  width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title = "Total de Células: {{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -91,14 +91,11 @@
 		            <span class="sr-only">Next</span>
 		          </a>
 		       </div> 
-		       
-		       <form action = "guardarResultados" method=post>
-		       		<input style = "margin-top: 35px" type=submit  value="Guardar Resultados">  
-		       </form>     
-		       <label>{{mensajeExito}}</label>
+		      
 		</div>
+		
 		{% endif %}
-		     
+		
 		     
 		{% if nombresPred|length !=0%}
 		<div  id= "carrusel2" class="carousel slide" data-ride="carousel">
@@ -115,13 +112,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "{{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title =  "{{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -144,6 +141,21 @@
 
 </div>
 </div>
+
+{%if totalEjecucion|length != 0%}
+	<label id= "totalTime">Tiempo Total de Ejecución: {{totalEjecucion}}</label>  
+{% endif %}
+
+{%if nombresPred | length != 0%}
+
+	<form action = "guardarResultados" method=post>
+		       		<input id = "botonGuardar"style = "margin-top: 35px" type=submit  value="Guardar Resultados">  
+	</form>     
+<br>
+
+<label id= "mensajeExito">{{mensajeExito}}</label>   
+
+{% endif %}
         
     </body>
     </html>

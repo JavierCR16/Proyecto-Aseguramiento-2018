@@ -9,6 +9,8 @@ from PIL import Image
 import numpy as np
 from django.urls.conf import path
 import shutil
+from Gestores import gestor_etiquetado_coloreado
+from Gestores.gestor_etiquetado_coloreado import pintar_coordenadas
 
 
 class GestorImagenes:
@@ -19,6 +21,7 @@ class GestorImagenes:
     def __init__(self):
         self.lista_nombres = []
         self.lista_preds = []
+        self.cant_celulas_preds = []
 
     @staticmethod
     def guardar_en_segmentacion(imagen, numero_imagen, path_test ):
@@ -26,6 +29,12 @@ class GestorImagenes:
         Docstring
         """
         imagen.save(path_test + str(numero_imagen) + '.png')
+    
+    @staticmethod    
+    def convertir_imagen(path_imagen_a_convertir):
+        imagen_tmp = Image.open(path_imagen_a_convertir)
+        imagen_tmp = imagen_tmp.convert('RGB')
+        imagen_tmp.save(path_imagen_a_convertir)
 
     def obtener_imagenes(self, directorio_imagenes,
                          directorio_temporal='static/', path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'):
@@ -117,22 +126,20 @@ class GestorImagenes:
             imagen_nueva.save(path_resultados+'resultado'+str(contador)+'.png')
             contador += 1
     
-    def colorearImagenes(self):
+    def colorear_etiquetar_imagenes(self):
         path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
         path_static = 'static/'
+        
+        self.lista_preds = sorted(self.lista_preds)
+        
         contador = 1
         for i in range (0, len(self.lista_preds)):
-            imagen_a_colorear = Image.open(path_static + self.lista_preds[i])
-            imagen_a_colorear = imagen_a_colorear.convert('RGB')
-            width, height = imagen_a_colorear.size
-            arreglo_imagen = np.asarray(imagen_a_colorear)
+            imagen_procesar = path_static + self.lista_preds[i]
+            GestorImagenes.convertir_imagen(imagen_procesar)
+            lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas(imagen_procesar)
+            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,contador)
+            self.cant_celulas_preds.append(len(lista_celulas))
             
-            for ancho in range (0, width):
-                for altura in range(0, height):
-                    if arreglo_imagen[ancho][altura][0] != 0  or arreglo_imagen[ancho][altura][1] != 0 or arreglo_imagen[ancho][altura][2] != 0:
-                        imagen_a_colorear.putpixel((altura,ancho), (255,0,0))
-                        
-            imagen_a_colorear.save(path_coloreadas + 'predColor' +str(contador)+'.png')
-            contador += 1
-                        
+            contador +=1
             
+        return self.cant_celulas_preds 

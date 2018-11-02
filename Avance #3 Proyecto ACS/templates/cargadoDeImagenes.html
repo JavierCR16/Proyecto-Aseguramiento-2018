@@ -112,13 +112,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img title = "{{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "Total de Células: {{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img title =  "{{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title =  "Total de Células: {{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -150,7 +150,11 @@
 
 	<form action = "guardarResultados" method=post>
 		       		<input id = "botonGuardar"style = "margin-top: 35px" type=submit  value="Guardar Resultados">  
-	</form>     
+	</form>
+	
+	<form action = "guardarCSV" method=post>
+		       		<input id = "botonGuardarCSV"style = "margin-top: 35px" type=submit  value="Generar CSV">  
+	</form>      
 <br>
 
 <label id= "mensajeExito">{{mensajeExito}}</label>   

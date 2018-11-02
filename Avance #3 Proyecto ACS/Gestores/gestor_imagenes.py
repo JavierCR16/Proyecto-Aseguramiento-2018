@@ -22,6 +22,7 @@ class GestorImagenes:
         self.lista_nombres = []
         self.lista_preds = []
         self.cant_celulas_preds = []
+        self.coordenadas_celulas = []
 
     @staticmethod
     def guardar_en_segmentacion(imagen, numero_imagen, path_test ):
@@ -71,6 +72,7 @@ class GestorImagenes:
         path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'
         path_resultados = '../Avance #3 Proyecto ACS/SegmentacionCelulas/resultados/'
         path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
+        path_csv = '../Avance #3 Proyecto ACS/CSV/'
         path_static = "static/"
         static_files = os.listdir(path_static)
         
@@ -88,6 +90,10 @@ class GestorImagenes:
         if os.path.exists(path_coloreadas):
             shutil.rmtree(path_coloreadas)
             os.makedirs(path_coloreadas)
+            
+        if os.path.exists(path_csv):
+            shutil.rmtree(path_csv)
+            os.makedirs(path_csv)
             
         for file in static_files:
             if file.endswith(".png"):
@@ -131,15 +137,16 @@ class GestorImagenes:
         path_static = 'static/'
         
         self.lista_preds = sorted(self.lista_preds)
-        
-        contador = 1
+        self.lista_nombres = sorted(self.lista_nombres)
+
         for i in range (0, len(self.lista_preds)):
             imagen_procesar = path_static + self.lista_preds[i]
             GestorImagenes.convertir_imagen(imagen_procesar)
             lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas(imagen_procesar)
-            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,contador)
+            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,self.lista_nombres[i].split('.')[0])
             self.cant_celulas_preds.append(len(lista_celulas))
+            self.coordenadas_celulas.append([lista_celulas])
             
-            contador +=1
+          
             
         return self.cant_celulas_preds 

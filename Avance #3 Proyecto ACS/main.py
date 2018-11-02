@@ -5,6 +5,7 @@ docstring
 from flask import Flask, render_template, request
 from Gestores.gestor_imagenes import GestorImagenes
 from SegmentacionCelulas import unet_CellSegmentation as segmentador
+from Gestores import gestorCSV
 
 
 APP = Flask(__name__)
@@ -42,7 +43,7 @@ def cargar_imagenes():
     gestor_imagenes.eliminar_directorios()
     __directorio_imagenes = request.form.get("directorioArchivos")
     imagenes_nombres = sorted(gestor_imagenes.obtener_imagenes(__directorio_imagenes))
-    tiempos_imagenes,tiempo_total = segmentador.predict()  #VER DONDE PONER ESTO
+    tiempos_imagenes,tiempo_total = segmentador.predict()  #VER DONDE PONER ESTO DE TIEMPO IMAGENES
     path_pred = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
     imagenes_pred = sorted(gestor_imagenes.obtener_nombre_preds(path_pred))
     cantidad_celulas = gestor_imagenes.colorear_etiquetar_imagenes()
@@ -53,6 +54,14 @@ def cargar_imagenes():
 @APP.route('/guardarResultados', methods=['POST'])
 def guardar_resultados():
     gestor_imagenes.guardar_en_archivos()
+    return render_template('cargadoDeImagenes.html',
+                           nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
+                           cantidadCelulas = gestor_imagenes.cant_celulas_preds,
+                           mensajeExito = 'Resultados guardados exitosamente!')
+
+@APP.route('/guardarCSV', methods=['POST'])
+def guardar_resultados_csv(): # VER QUE COSAS LE MANDO AL HTML PARA QUE QUEDE IGUAL TUANIS
+    gestorCSV.procesar_informacion_celulas(gestor_imagenes.coordenadas_celulas,gestor_imagenes.lista_nombres)
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
                            cantidadCelulas = gestor_imagenes.cant_celulas_preds,

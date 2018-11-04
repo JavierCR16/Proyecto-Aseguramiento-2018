@@ -25,6 +25,7 @@ class GestorImagenes:
         self.cant_celulas_preds = []
         self.coordenadas_celulas = []
         self.centroides = []
+        self.tiempo_total_ejecucion = 0
 
     @staticmethod
     def guardar_en_segmentacion(imagen, numero_imagen, path_test ):

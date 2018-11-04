@@ -47,6 +47,7 @@ def cargar_imagenes():
     path_pred = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
     imagenes_pred = sorted(gestor_imagenes.obtener_nombre_preds(path_pred))
     cantidad_celulas = gestor_imagenes.colorear_etiquetar_imagenes()
+    gestor_imagenes.tiempo_total_ejecucion = tiempo_total
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes=imagenes_nombres, nombresPred=imagenes_pred,
                            totalEjecucion = str(tiempo_total), cantidadCelulas = cantidad_celulas)
@@ -57,7 +58,7 @@ def guardar_resultados():
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
                            cantidadCelulas = gestor_imagenes.cant_celulas_preds,
-                           mensajeExito = 'Resultados guardados exitosamente!')
+                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = str(gestor_imagenes.tiempo_total_ejecucion))
 
 @APP.route('/guardarCSV', methods=['POST'])
 def guardar_resultados_csv(): # VER QUE COSAS LE MANDO AL HTML PARA QUE QUEDE IGUAL TUANIS
@@ -65,7 +66,7 @@ def guardar_resultados_csv(): # VER QUE COSAS LE MANDO AL HTML PARA QUE QUEDE IG
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
                            cantidadCelulas = gestor_imagenes.cant_celulas_preds,
-                           mensajeExito = 'Resultados guardados exitosamente!')
+                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = str(gestor_imagenes.tiempo_total_ejecucion))
 
 if __name__ == '__main__':
 

@@ -10,7 +10,8 @@ import numpy as np
 from django.urls.conf import path
 import shutil
 from Gestores import gestor_etiquetado_coloreado
-from Gestores.gestor_etiquetado_coloreado import pintar_coordenadas
+from Gestores.gestor_etiquetado_coloreado import pintar_coordenadas,\
+    generar_centroides_celulas
 
 
 class GestorImagenes:
@@ -23,6 +24,7 @@ class GestorImagenes:
         self.lista_preds = []
         self.cant_celulas_preds = []
         self.coordenadas_celulas = []
+        self.centroides = []
 
     @staticmethod
     def guardar_en_segmentacion(imagen, numero_imagen, path_test ):
@@ -141,12 +143,13 @@ class GestorImagenes:
 
         for i in range (0, len(self.lista_preds)):
             imagen_procesar = path_static + self.lista_preds[i]
-            GestorImagenes.convertir_imagen(imagen_procesar)
             lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas(imagen_procesar)
-            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,self.lista_nombres[i].split('.')[0])
+            lista_minimos_maximos = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
+            centroides = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
+            
+            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,self.lista_nombres[i].split('.')[0],centroides)
             self.cant_celulas_preds.append(len(lista_celulas))
             self.coordenadas_celulas.append([lista_celulas])
-            
-          
-            
+            self.centroides.append(centroides)
+                
         return self.cant_celulas_preds 

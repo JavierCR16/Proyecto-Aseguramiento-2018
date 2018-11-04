@@ -5,7 +5,7 @@ docstring
 from flask import Flask, render_template, request
 from Gestores.gestor_imagenes import GestorImagenes
 from SegmentacionCelulas import unet_CellSegmentation as segmentador
-from Gestores import gestorCSV
+from Gestores import gestor_csv
 
 
 APP = Flask(__name__)
@@ -61,7 +61,7 @@ def guardar_resultados():
 
 @APP.route('/guardarCSV', methods=['POST'])
 def guardar_resultados_csv(): # VER QUE COSAS LE MANDO AL HTML PARA QUE QUEDE IGUAL TUANIS
-    gestorCSV.procesar_informacion_celulas(gestor_imagenes.coordenadas_celulas,gestor_imagenes.lista_nombres)
+    gestor_csv.procesar_informacion_celulas(gestor_imagenes.coordenadas_celulas,gestor_imagenes.centroides,gestor_imagenes.lista_nombres)
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
                            cantidadCelulas = gestor_imagenes.cant_celulas_preds,

@@ -32,19 +32,23 @@ def registroObjetos(listaObjetos,contador): #ObjetoImagen(__numero,__centroide,_
     except:
         return False
     
-def procesar_informacion_celulas(lista_archivos_celulas, identificadores_archivos):
+def procesar_informacion_celulas(lista_archivos_celulas, lista_centroides,identificadores_archivos):
     identificadores_archivos = sorted(identificadores_archivos)
     listaObjetos = []
     identificador = 1
     contador = 0
+    index_centroide = 0
     for archivo_celulas in lista_archivos_celulas:
         for lista_celulas in archivo_celulas:
             for celula in lista_celulas:
-                listaObjetos.append(ObjetoImagen(identificador,0,len(celula)).__dict__)
+                centroide = lista_centroides[contador][index_centroide]
+                listaObjetos.append(ObjetoImagen(identificador,centroide,len(celula)).__dict__)
                 identificador += 1
+                index_centroide += 1
         
         registroObjetos(listaObjetos, identificadores_archivos[contador].split('.')[0])
         identificador = 1
+        index_centroide = 0
         contador += 1
         listaObjetos.clear()
     

@@ -18,7 +18,7 @@ float:left;
 	font-family:-webkit-pictograph
 }
 
-#botonGuardar{
+.botonGuardar{
 
 border: 1px solid #3261C3;
 border-radius: 5px;
@@ -39,7 +39,7 @@ line-height:0;/*LOL, I put 0*/
 transition:all 0.3s;
 margin-left:90px;
 }
-#botonGuardar:hover
+.botonGuardar:hover
 {
   box-shadow:0 -5px 10px #3455C1 inset;
   color:#96bcfc;

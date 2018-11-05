@@ -4,9 +4,12 @@ Created on Nov 2, 2018
 @author: Javier
 '''
 from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 import numpy as np
 from operator import itemgetter
 import operator
+from PIL import ImageDraw
 
 def revisar_pixeles_aliados(arregloImagen, ancho, altura, coordenadas):
 
@@ -149,15 +152,26 @@ def generar_centroides_celulas(lista_tupla_ejes, path_imagen):
 
     return lista_centros
     
-def pintar_coordenadas(lista,path_file,path_coloreadas ,contador,coordenadas_centroides):
+def pintar_coordenadas(lista,path_file,path_coloreadas,path_static ,contador,coordenadas_centroides):
     imagen_color_etiq = Image.open(path_file)
     imagen_color_etiq = imagen_color_etiq.convert('RGB')
+
+    etiquetar = ImageDraw.Draw(imagen_color_etiq)
+    xy_etiquetado_desplazamiento = (-4,-4)
+    
+    font_definido = ImageFont.truetype("BRITANIC", 11)
+    index = 1
     for listaCoordenadas in lista:
         for i in range(len(listaCoordenadas)):
             imagen_color_etiq.putpixel(listaCoordenadas[i][::-1],(255,255,255))
     
     
-    for centroide in coordenadas_centroides:
-        imagen_color_etiq.putpixel(centroide, (255,0,0))
+    for centroide in coordenadas_centroides: #HAY QUE QUITARLO
+        centroide_tmp = list(centroide).copy()
+        centroide_tmp = tuple(map(operator.add, centroide_tmp, xy_etiquetado_desplazamiento))
+        etiquetar.text(centroide_tmp,str(index),fill = (255,0,0), font=font_definido)
+        index +=1
+    imagen_color_etiq.save(path_static + 'predColorEtiq' +str(contador)+'.png')
     imagen_color_etiq.save(path_coloreadas + 'predColorEtiq' +str(contador)+'.png')
+    
     

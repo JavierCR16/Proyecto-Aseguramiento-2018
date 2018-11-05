@@ -12,7 +12,7 @@ import shutil
 from Gestores import gestor_etiquetado_coloreado
 from Gestores.gestor_etiquetado_coloreado import pintar_coordenadas,\
     generar_centroides_celulas
-
+import time
 
 class GestorImagenes:
     """
@@ -22,10 +22,11 @@ class GestorImagenes:
     def __init__(self):
         self.lista_nombres = []
         self.lista_preds = []
+        self.lista_etiq = []
         self.cant_celulas_preds = []
         self.coordenadas_celulas = []
         self.centroides = []
-        self.tiempo_total_ejecucion = 0
+        self.tiempos_lista = []
 
     @staticmethod
     def guardar_en_segmentacion(imagen, numero_imagen, path_test ):
@@ -55,7 +56,8 @@ class GestorImagenes:
                 imagen_nueva.save(directorio_temporal+str(num_img)+'.png')
                 GestorImagenes.guardar_en_segmentacion(imagen_nueva, num_img, path_test)
                 num_img += 1
-
+                
+            self.lista_nombres = sorted(self.lista_nombres)
             return self.lista_nombres
         except Exception:
             traceback.print_exc()
@@ -67,8 +69,17 @@ class GestorImagenes:
         """
         for file in os.listdir(directorio_preds):
             self.lista_preds.append(file)
-
+            
+        self.lista_preds = sorted(self.lista_preds)
         return self.lista_preds
+    
+    def obtener_nombre_etiq(self,directorio_etiq):
+        
+        for file in os.listdir(directorio_etiq):
+            self.lista_etiq.append(file)
+            
+        self.lista_etiq = sorted(self.lista_etiq)
+        return self.lista_etiq
     
     def eliminar_directorios(self):
         path_preds = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
@@ -135,22 +146,24 @@ class GestorImagenes:
             imagen_nueva.save(path_resultados+'resultado'+str(contador)+'.png')
             contador += 1
     
-    def colorear_etiquetar_imagenes(self):
+    def colorear_etiquetar_imagenes(self,lista_tiempos):
         path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
         path_static = 'static/'
         
-        self.lista_preds = sorted(self.lista_preds)
-        self.lista_nombres = sorted(self.lista_nombres)
-
         for i in range (0, len(self.lista_preds)):
+            tiempo_inicio = time.time()
+            
             imagen_procesar = path_static + self.lista_preds[i]
             lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas(imagen_procesar)
             lista_minimos_maximos = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
             centroides = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
             
-            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,self.lista_nombres[i].split('.')[0],centroides)
+            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,path_static,self.lista_nombres[i].split('.')[0],centroides)
             self.cant_celulas_preds.append(len(lista_celulas))
             self.coordenadas_celulas.append([lista_celulas])
             self.centroides.append(centroides)
-                
-        return self.cant_celulas_preds 
+            
+            tiempo_duracion = time.time()- tiempo_inicio
+            lista_tiempos[0][i]+= tiempo_duracion #Accede a los tiempos de las imagenes
+            lista_tiempos[1]+= tiempo_duracion
+            

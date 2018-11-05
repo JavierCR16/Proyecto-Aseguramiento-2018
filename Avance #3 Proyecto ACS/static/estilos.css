@@ -10,6 +10,13 @@ float:left;
 	margin-right:3cm;
 }
 
+#carrusel3{
+	width: 550px; height:410px;
+	float:right;
+	margin-top:1cm;
+	margin-right:10.5cm;
+}
+
 #totalTime{
 	margin-top:15px; 
 	margin-left:400px;

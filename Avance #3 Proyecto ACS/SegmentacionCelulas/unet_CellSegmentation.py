@@ -187,7 +187,7 @@ def predict():
         
         tiempos_imagen[index]+= time.time() - tiempo_inicio
         
-    return (tiempos_imagen,time.time() - start_time)
+    return [tiempos_imagen,time.time() - start_time]
 
 #if __name__ == '__main__':
  #   predict()

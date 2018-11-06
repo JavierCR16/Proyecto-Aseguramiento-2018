@@ -68,7 +68,8 @@ def guardar_resultados():
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds
                            , nombresEtiq = gestor_imagenes.lista_etiq, cantidadCelulas = gestor_imagenes.cant_celulas_preds,
-                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1])
+                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1],
+                           totalImagenes = gestor_imagenes.tiempos_lista[0])
 
 @APP.route('/guardarCSV', methods=['POST'])
 def guardar_resultados_csv(): 
@@ -77,7 +78,8 @@ def guardar_resultados_csv():
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
                            nombresEtiq = gestor_imagenes.lista_etiq, cantidadCelulas = gestor_imagenes.cant_celulas_preds,
-                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1])
+                           mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1],
+                           totalImagenes = gestor_imagenes.tiempos_lista[0])
 
 if __name__ == '__main__':
 

@@ -35,6 +35,25 @@ class GestorImagenes:
         """
         imagen.save(path_test + str(numero_imagen) + '.png')
     
+    def formatear_tiempos(self):
+
+        if(self.tiempos_lista[1]>60):
+            tiempo_tmp = self.tiempos_lista[1] /60
+            self.tiempos_lista[1] = str(round(tiempo_tmp,2))+" min"
+        else:
+            self.tiempos_lista[1] = str(round(self.tiempos_lista[1],2))+" s"
+  
+        index = 0
+        for tiempo_imagen in self.tiempos_lista[0]:
+            if(self.tiempos_lista[0][index] > 60):
+                tiempo_tmp = self.tiempos_lista[0][index] /60
+                self.tiempos_lista[0][index] = str(round(tiempo_tmp,2))+" min"
+            else:
+                self.tiempos_lista[0][index] = str(round(self.tiempos_lista[0][index],2))+" s"
+            
+            index += 1
+            
+    
     @staticmethod    
     def convertir_imagen(path_imagen_a_convertir):
         imagen_tmp = Image.open(path_imagen_a_convertir)

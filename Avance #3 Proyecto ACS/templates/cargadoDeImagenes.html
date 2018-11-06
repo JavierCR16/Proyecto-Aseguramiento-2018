@@ -68,13 +68,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img title = "Total de Células: {{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "Total de Células: {{cantidadCelulas[0]}} &#xA;Tiempo de Ejecución: {{totalImagenes[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img title = "Total de Células: {{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title = "Total de Células: {{cantidadCelulas[loop.index -1]}} &#xA;Tiempo de Ejecución: {{totalImagenes[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -112,13 +112,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img title = "Total de Células: {{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "Total de Células: {{cantidadCelulas[0]}} &#xA;Tiempo de Ejecución: {{totalImagenes[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img title =  "Total de Células: {{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title =  "Total de Células: {{cantidadCelulas[loop.index -1]}} &#xA;Tiempo de Ejecución: {{totalImagenes[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -156,13 +156,13 @@
 		                
 		                {%if loop.index == 1%}
 		                    <div class="carousel-item active">
-		                      <img title = "Total de Células: {{cantidadCelulas[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+		                      <img title = "Total de Células: {{cantidadCelulas[0]}} &#xA;Tiempo de Ejecución: {{totalImagenes[0]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 		                    </div>
 		              
 		                {%else%}
 		
 			                <div class="carousel-item">
-			                  <img title =  "Total de Células: {{cantidadCelulas[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
+			                  <img title =  "Total de Células: {{cantidadCelulas[loop.index -1]}} &#xA;Tiempo de Ejecución: {{totalImagenes[loop.index -1]}}" width ="550" height= "410" class="d-block w-100 imagenesCargadas" src="/static/{{imagen}}">
 			                </div>
 		
 		                {% endif %}
@@ -186,17 +186,8 @@
 </div>
 </div>
 
-{%if (totalEjecucion|string)|length != 0%}
-	{%set medida = 's'%}
-	
-	{%if totalEjecucion>60 %}
-		{% set totalEjecucion = '%0.2f'| format(totalEjecucion/60|float) %}
-		
-		{% set medida = 'min' %}
-		
-	{% endif %}
-	
-	<label id= "totalTime">Tiempo Total de Ejecución: {{totalEjecucion}} {{medida}}</label>  
+{%if totalEjecucion|length != 0%}
+	<label id= "totalTime">Tiempo Total de Ejecución: {{totalEjecucion}} </label>  
 {% endif %}
 
 {%if nombresPred | length != 0%}

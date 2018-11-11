@@ -6,7 +6,7 @@ Created on Sep 13, 2018
 import unittest
 import os
 from Gestores.gestor_imagenes import GestorImagenes
-from Gestores import gestor_etiquetado_coloreado
+from Gestores import gestor_coloreado
 from Gestores import gestor_csv
 from SegmentacionCelulas import unet_CellSegmentation as segmentador
 from wheel.signatures import assertTrue
@@ -72,25 +72,25 @@ class SimpleTestCase(unittest.TestCase):
         self.assertTrue(existe_predicciones, "Predicciones no fueron creadas")
         
     def test_pixeles_celula(self):
-        lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
+        lista_celulas = gestor_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
         self.assertTrue(isinstance(lista_celulas, list))
         self.assertTrue(isinstance(lista_celulas[0],list))
         
     
     def test_centroides_generados(self):
-        lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
-        lista_tupla_ejes = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
-        lista_centros = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
+        lista_celulas = gestor_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
+        lista_tupla_ejes = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
+        lista_centros = gestor_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
         
         self.assertTrue(isinstance(lista_centros,list))
         self.assertTrue(isinstance(lista_centros[0], tuple))
     
-    def test_celulas_pintadas(self):
-        lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
-        lista_tupla_ejes = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
-        lista_centros = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
+    def test_celulas_pintadas_etiquetadas(self):
+        lista_celulas = gestor_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
+        lista_tupla_ejes = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
+        lista_centros = gestor_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
         
-        gestor_etiquetado_coloreado.pintar_coordenadas(lista_celulas, '../static/'+self.lista_preds[0], self.directorioColoreadas
+        gestor_coloreado.pintar_coordenadas(lista_celulas, '../static/'+self.lista_preds[0], self.directorioColoreadas
                                                        , '../static/', 1, lista_centros)
         
         self.assertTrue(len(os.listdir(self.directorioColoreadas)) != 0)
@@ -102,9 +102,9 @@ class SimpleTestCase(unittest.TestCase):
         
     #A PARTIR DE AQUI LAS PRUEBAS DE INTEGRACION
     def test_generar_csv_objetos(self):
-        lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
-        lista_tupla_ejes = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
-        lista_centros = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
+        lista_celulas = gestor_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
+        lista_tupla_ejes = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
+        lista_centros = gestor_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
         
         gestor_csv.procesar_informacion_celulas([lista_celulas], [lista_centros], self.listaImagenes, 1)
         

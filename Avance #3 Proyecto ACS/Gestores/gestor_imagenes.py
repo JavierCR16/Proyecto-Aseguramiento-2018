@@ -9,8 +9,9 @@ from PIL import Image
 import numpy as np
 from django.urls.conf import path
 import shutil
-from Gestores import gestor_etiquetado_coloreado
-from Gestores.gestor_etiquetado_coloreado import pintar_coordenadas,\
+from Gestores import gestor_etiquetado
+from Gestores import gestor_coloreado
+from Gestores.gestor_coloreado import pintar_coordenadas,\
     generar_centroides_celulas
 import time
 
@@ -172,11 +173,14 @@ class GestorImagenes:
             tiempo_inicio = time.time()
             
             imagen_procesar = path_static + self.lista_preds[i]
-            lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas(imagen_procesar)
-            lista_minimos_maximos = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
-            centroides = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
+            lista_celulas = gestor_coloreado.obtener_coordenadas_celulas(imagen_procesar)
+            lista_minimos_maximos = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
+            centroides = gestor_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
             
-            pintar_coordenadas(lista_celulas,imagen_procesar,path_coloreadas,path_static,self.lista_nombres[i].split('.')[0],centroides)
+            imagen_a_etiquetar = gestor_coloreado.pintar_coordenadas(lista_celulas,imagen_procesar,self.lista_nombres[i].split('.')[0])
+            
+            gestor_etiquetado.etiquetar_imagen(imagen_a_etiquetar, centroides,path_static,path_coloreadas)
+            
             self.cant_celulas_preds.append(len(lista_celulas))
             self.coordenadas_celulas.append([lista_celulas])
             self.centroides.append(centroides)

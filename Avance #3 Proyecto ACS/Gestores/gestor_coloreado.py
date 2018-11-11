@@ -154,15 +154,10 @@ def generar_centroides_celulas(lista_tupla_ejes, path_imagen):
 
     return lista_centros
     
-def pintar_coordenadas(lista,path_file,path_coloreadas,path_static ,contador,coordenadas_centroides):
+def pintar_coordenadas(lista,path_file,contador):
     imagen_color_etiq = Image.open(path_file)
     imagen_color_etiq = imagen_color_etiq.convert('RGB')
 
-    etiquetar = ImageDraw.Draw(imagen_color_etiq)
-    xy_etiquetado_desplazamiento = (-4,-4)
-    
-    font_definido = ImageFont.truetype("BRITANIC", 11)
-    index = 1
     for listaCoordenadas in lista:
         r = ran.randint(1,255)
         g = ran.randint(1,255)
@@ -170,14 +165,4 @@ def pintar_coordenadas(lista,path_file,path_coloreadas,path_static ,contador,coo
         
         for i in range(len(listaCoordenadas)):
             imagen_color_etiq.putpixel(listaCoordenadas[i][::-1],(r,g,b))
-    
-    
-    for centroide in coordenadas_centroides: #HAY QUE QUITARLO
-        centroide_tmp = list(centroide).copy()
-        centroide_tmp = tuple(map(operator.add, centroide_tmp, xy_etiquetado_desplazamiento))
-        etiquetar.text(centroide_tmp,str(index),fill = (255,255,255), font=font_definido)
-        index +=1
-    imagen_color_etiq.save(path_static + 'predColorEtiq' +str(contador)+'.png')
-    imagen_color_etiq.save(path_coloreadas + 'predColorEtiq' +str(contador)+'.png')
-    
-    
+    return imagen_color_etiq

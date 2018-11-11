@@ -154,7 +154,7 @@ def generar_centroides_celulas(lista_tupla_ejes, path_imagen):
 
     return lista_centros
     
-def pintar_coordenadas(lista,path_file,contador):
+def pintar_coordenadas(lista,path_file):
     imagen_color_etiq = Image.open(path_file)
     imagen_color_etiq = imagen_color_etiq.convert('RGB')
 

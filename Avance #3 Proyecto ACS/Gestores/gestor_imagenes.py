@@ -177,9 +177,9 @@ class GestorImagenes:
             lista_minimos_maximos = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
             centroides = gestor_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
             
-            imagen_a_etiquetar = gestor_coloreado.pintar_coordenadas(lista_celulas,imagen_procesar,self.lista_nombres[i].split('.')[0])
+            imagen_a_etiquetar = gestor_coloreado.pintar_coordenadas(lista_celulas,imagen_procesar)
             
-            gestor_etiquetado.etiquetar_imagen(imagen_a_etiquetar, centroides,path_static,path_coloreadas)
+            gestor_etiquetado.etiquetar_imagen(imagen_a_etiquetar, centroides,path_static,path_coloreadas,self.lista_nombres[i].split('.')[0])
             
             self.cant_celulas_preds.append(len(lista_celulas))
             self.coordenadas_celulas.append([lista_celulas])

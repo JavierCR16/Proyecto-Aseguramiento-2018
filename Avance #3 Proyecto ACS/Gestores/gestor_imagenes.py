@@ -165,27 +165,30 @@ class GestorImagenes:
             imagen_nueva.save(path_resultados+'resultado'+str(contador)+'.png')
             contador += 1
     
-    def colorear_etiquetar_imagenes(self,lista_tiempos):
-        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
-        path_static = 'static/'
-        
-        for i in range (0, len(self.lista_preds)):
-            tiempo_inicio = time.time()
-            
-            imagen_procesar = path_static + self.lista_preds[i]
-            lista_celulas = gestor_coloreado.obtener_coordenadas_celulas(imagen_procesar)
-            lista_minimos_maximos = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
-            centroides = gestor_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
-            
-            imagen_a_etiquetar = gestor_coloreado.pintar_coordenadas(lista_celulas,imagen_procesar)
-            
-            gestor_etiquetado.etiquetar_imagen(imagen_a_etiquetar, centroides,path_static,path_coloreadas,self.lista_nombres[i].split('.')[0])
-            
-            self.cant_celulas_preds.append(len(lista_celulas))
-            self.coordenadas_celulas.append([lista_celulas])
-            self.centroides.append(centroides)
-            
-            tiempo_duracion = time.time()- tiempo_inicio
-            lista_tiempos[0][i]+= tiempo_duracion #Accede a los tiempos de las imagenes
-            lista_tiempos[1]+= tiempo_duracion
-            
+    def colorear_etiquetar_imagenes(self,lista_tiempos,tipo):
+        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/' if tipo == 0 else '../SegmentacionCelulas/predsColoreadasEtiquetadas/'
+        path_static = 'static/' if tipo == 0 else '../static/'
+        try:
+            for i in range (0, len(self.lista_preds)):
+                tiempo_inicio = time.time()
+                
+                imagen_procesar = path_static + self.lista_preds[i]
+                lista_celulas = gestor_coloreado.obtener_coordenadas_celulas(imagen_procesar)
+                lista_minimos_maximos = gestor_coloreado.obtener_minimos_maximos(lista_celulas)
+                centroides = gestor_coloreado.generar_centroides_celulas(lista_minimos_maximos, imagen_procesar)
+                
+                imagen_a_etiquetar = gestor_coloreado.pintar_coordenadas(lista_celulas,imagen_procesar)
+                
+                gestor_etiquetado.etiquetar_imagen(imagen_a_etiquetar, centroides,path_static,path_coloreadas,self.lista_nombres[i].split('.')[0])
+                
+                self.cant_celulas_preds.append(len(lista_celulas))
+                self.coordenadas_celulas.append([lista_celulas])
+                self.centroides.append(centroides)
+                
+                tiempo_duracion = time.time()- tiempo_inicio
+                lista_tiempos[0][i]+= tiempo_duracion #Accede a los tiempos de las imagenes
+                lista_tiempos[1]+= tiempo_duracion
+            return True
+        except:
+            return False
+                

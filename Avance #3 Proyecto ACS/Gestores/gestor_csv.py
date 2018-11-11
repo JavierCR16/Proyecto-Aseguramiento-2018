@@ -36,7 +36,7 @@ def registroObjetos(listaObjetos,contador, path_csv): #ObjetoImagen(__numero,__c
     
 def procesar_informacion_celulas(lista_archivos_celulas, lista_centroides,identificadores_archivos, tipo):
     path_csv = '../Avance #3 Proyecto ACS/CSV/' if tipo == 0 else '../CSV/'
-    
+
     identificadores_archivos = sorted(identificadores_archivos)
     listaObjetos = []
     identificador = 1

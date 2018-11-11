@@ -52,7 +52,7 @@ def cargar_imagenes():
     
     imagenes_pred = gestor_imagenes.obtener_nombre_preds(path_pred)
     
-    gestor_imagenes.colorear_etiquetar_imagenes(lista_tiempos)
+    gestor_imagenes.colorear_etiquetar_imagenes(lista_tiempos,0)
     
     imagenes_etiq = gestor_imagenes.obtener_nombre_etiq(path_etiq)
     
@@ -61,7 +61,7 @@ def cargar_imagenes():
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes=imagenes_nombres, nombresPred=imagenes_pred, nombresEtiq = imagenes_etiq,
                            totalEjecucion = gestor_imagenes.tiempos_lista[1], totalImagenes = gestor_imagenes.tiempos_lista[0]
-                           ,cantidadCelulas = 0)#gestor_imagenes.cant_celulas_preds)
+                           ,cantidadCelulas = gestor_imagenes.cant_celulas_preds)
 
 @APP.route('/guardarResultados', methods=['POST'])
 def guardar_resultados():

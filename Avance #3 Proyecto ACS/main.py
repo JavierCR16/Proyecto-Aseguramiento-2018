@@ -60,8 +60,8 @@ def cargar_imagenes():
     gestor_imagenes.formatear_tiempos()
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes=imagenes_nombres, nombresPred=imagenes_pred, nombresEtiq = imagenes_etiq,
-                           totalEjecucion = gestor_imagenes.tiempos_lista[1], totalImagenes = gestor_imagenes.tiempos_lista[0],
-                           cantidadCelulas = gestor_imagenes.cant_celulas_preds)
+                           totalEjecucion = gestor_imagenes.tiempos_lista[1], totalImagenes = gestor_imagenes.tiempos_lista[0]
+                           ,cantidadCelulas = 0)#gestor_imagenes.cant_celulas_preds)
 
 @APP.route('/guardarResultados', methods=['POST'])
 def guardar_resultados():

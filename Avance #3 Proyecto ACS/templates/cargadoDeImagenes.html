@@ -45,7 +45,7 @@
     <form action = "cargarImagenes" method=post enctype=multipart/form-data>
 
         <div style ="max-width: 500px" >
-          <input style = "margin-top: 35px" type=submit  value=Segmentar>
+          <input style = "margin-top: 35px" name = "Segmentar" type=submit  value=Segmentar>
             <div style = "float:right">
                 <label>Directorio de Imágenes</label>
                 <input type = text style = "width: 10cm" class="w3-input w3-border w3-light-grey" name = directorioArchivos>
@@ -193,15 +193,15 @@
 {%if nombresPred | length != 0%}
 
 	<form action = "guardarResultados" method=post>
-		       		<input class= "botonGuardar"style = "margin-top: 35px" type=submit  value="Guardar Resultados">  
+		       		<input name = "Resultados" class= "botonGuardar"style = "margin-top: 35px" type=submit  value="Guardar Resultados">  
 	</form>
 	
 	<form action = "guardarCSV" method=post>
-		       		<input class = "botonGuardar"style = "margin-top: 35px" type=submit  value="Generar CSV">  
+		       		<input name = "CSV" class = "botonGuardar"style = "margin-top: 35px" type=submit  value="Generar CSV">  
 	</form>  
 	
-	<form action = "guardarDICE" method=post>
-		       		<input class = "botonGuardar"style = "margin-top: 35px" type=submit  value="Generar DICE">  
+	<form  action = "guardarDICE" method=post>
+		       		<input name = "DICE" class = "botonGuardar"style = "margin-top: 35px" type=submit  value="Generar DICE">  
 	</form>       
 <br>
 

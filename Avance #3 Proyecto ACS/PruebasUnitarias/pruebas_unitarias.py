@@ -100,6 +100,14 @@ class SimpleTestCase(unittest.TestCase):
         
         self.assertTrue(os.path.exists('../CSV/datos_dice.csv'))
         
+    #A PARTIR DE AQUI LAS PRUEBAS DE INTEGRACION
+    def test_generar_csv_objetos(self):
+        lista_celulas = gestor_etiquetado_coloreado.obtener_coordenadas_celulas('../static/'+self.lista_preds[0])
+        lista_tupla_ejes = gestor_etiquetado_coloreado.obtener_minimos_maximos(lista_celulas)
+        lista_centros = gestor_etiquetado_coloreado.generar_centroides_celulas(lista_tupla_ejes, '../static/'+self.lista_preds[0])
+        
+        gestor_csv.procesar_informacion_celulas([lista_celulas], [lista_centros], self.listaImagenes, 1)
+        
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

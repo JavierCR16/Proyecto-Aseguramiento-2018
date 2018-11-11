@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 from Gestores.gestor_imagenes import GestorImagenes
 from SegmentacionCelulas import unet_CellSegmentation as segmentador
 from Gestores import gestor_csv
+import os
 
 
 APP = Flask(__name__)
@@ -17,7 +18,8 @@ def main():
     """"
     Docstring
     """
-    gestor_imagenes.eliminar_directorios()
+    gestor_imagenes.eliminar_directorios(0)
+        
     return render_template('cargadoDeImagenes.html')
 
 
@@ -40,7 +42,7 @@ def cargar_imagenes():
     """"
     Docstring
     """
-    gestor_imagenes.eliminar_directorios()
+    gestor_imagenes.eliminar_directorios(0)
     path_pred = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
     path_etiq = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas'
     __directorio_imagenes = request.form.get("directorioArchivos")
@@ -73,7 +75,7 @@ def guardar_resultados():
 
 @APP.route('/guardarCSV', methods=['POST'])
 def guardar_resultados_csv(): 
-    gestor_csv.procesar_informacion_celulas(gestor_imagenes.coordenadas_celulas,gestor_imagenes.centroides,gestor_imagenes.lista_nombres)
+    gestor_csv.procesar_informacion_celulas(gestor_imagenes.coordenadas_celulas,gestor_imagenes.centroides,gestor_imagenes.lista_nombres,0)
     
     return render_template('cargadoDeImagenes.html',
                            nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
@@ -81,7 +83,17 @@ def guardar_resultados_csv():
                            mensajeExito = 'Resultados guardados exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1],
                            totalImagenes = gestor_imagenes.tiempos_lista[0])
 
+@APP.route('/guardarDICE', methods=['POST'])
+def guardar_dice_csv():
+    gestor_csv.calcular_precision_dice(gestor_imagenes.lista_preds,0)
+    
+    return render_template('cargadoDeImagenes.html',
+                           nombresImagenes = gestor_imagenes.lista_nombres, nombresPred= gestor_imagenes.lista_preds, 
+                           nombresEtiq = gestor_imagenes.lista_etiq, cantidadCelulas = gestor_imagenes.cant_celulas_preds,
+                           mensajeExito = 'Metrica de DICE aplicada exitosamente!',totalEjecucion = gestor_imagenes.tiempos_lista[1],
+                           totalImagenes = gestor_imagenes.tiempos_lista[0])
+
 if __name__ == '__main__':
 
-    APP.run(debug=True)
+    APP.run(threaded = False,debug=True)
     

@@ -69,8 +69,7 @@ class GestorImagenes:
         try:
             for file in os.listdir(directorio_imagenes):
                 path_imagen = directorio_imagenes+"/"+file
-                arreglo_imagen = np.asarray(Image.open(path_imagen))
-                imagen_nueva = Image.fromarray(arreglo_imagen)
+                imagen_nueva = Image.open(path_imagen)
                 self.lista_nombres.append(str(num_img)+'.png')
                 imagen_nueva.save(directorio_temporal+str(num_img)+'.png')
                 GestorImagenes.guardar_en_segmentacion(imagen_nueva, num_img, path_test)
@@ -100,13 +99,13 @@ class GestorImagenes:
         self.lista_etiq = sorted(self.lista_etiq)
         return self.lista_etiq
     
-    def eliminar_directorios(self):
-        path_preds = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds'
-        path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/'
-        path_resultados = '../Avance #3 Proyecto ACS/SegmentacionCelulas/resultados/'
-        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/'
-        path_csv = '../Avance #3 Proyecto ACS/CSV/'
-        path_static = "static/"
+    def eliminar_directorios(self,tipo):
+        path_preds = '../Avance #3 Proyecto ACS/SegmentacionCelulas/preds' if tipo == 0 else '../SegmentacionCelulas/preds'
+        path_test = '../Avance #3 Proyecto ACS/SegmentacionCelulas/raw/hoechst/test/' if tipo == 0 else '../SegmentacionCelulas/raw/hoechst/test/'
+        path_resultados = '../Avance #3 Proyecto ACS/SegmentacionCelulas/resultados/' if tipo == 0 else '../SegmentacionCelulas/resultados/'
+        path_coloreadas = '../Avance #3 Proyecto ACS/SegmentacionCelulas/predsColoreadasEtiquetadas/' if tipo == 0 else '../SegmentacionCelulas/predsColoreadasEtiquetadas/'
+        path_csv = '../Avance #3 Proyecto ACS/CSV/' if tipo == 0 else '../CSV/'
+        path_static = "static/" if tipo == 0 else '../static/'
         static_files = os.listdir(path_static)
         
         if os.path.exists(path_preds):

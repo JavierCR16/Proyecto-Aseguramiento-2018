@@ -7,12 +7,15 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 import numpy as np
+import random as ran
 from operator import itemgetter
 import operator
 from PIL import ImageDraw
 
 def revisar_pixeles_aliados(arregloImagen, ancho, altura, coordenadas):
-
+    if(ancho == 256  or altura == 256 or ancho<0 or altura <0):
+        return coordenadas
+    
     if(not esNegro(arregloImagen,ancho,altura) and (ancho,altura) not in coordenadas):
 
         coordenadas.append((ancho,altura))
@@ -27,7 +30,6 @@ def revisar_pixeles_aliados(arregloImagen, ancho, altura, coordenadas):
     return coordenadas
         
 def esNegro(arregloImagen, ancho, altura):
-
     if(arregloImagen[ancho][altura]==0):#[0] == 0 and  arregloImagen[ancho][altura][1] == 0 and arregloImagen[ancho][altura][2] == 0):
         return True
     return False
@@ -162,14 +164,18 @@ def pintar_coordenadas(lista,path_file,path_coloreadas,path_static ,contador,coo
     font_definido = ImageFont.truetype("BRITANIC", 11)
     index = 1
     for listaCoordenadas in lista:
+        r = ran.randint(1,255)
+        g = ran.randint(1,255)
+        b = ran.randint(1,255)
+        
         for i in range(len(listaCoordenadas)):
-            imagen_color_etiq.putpixel(listaCoordenadas[i][::-1],(255,255,255))
+            imagen_color_etiq.putpixel(listaCoordenadas[i][::-1],(r,g,b))
     
     
     for centroide in coordenadas_centroides: #HAY QUE QUITARLO
         centroide_tmp = list(centroide).copy()
         centroide_tmp = tuple(map(operator.add, centroide_tmp, xy_etiquetado_desplazamiento))
-        etiquetar.text(centroide_tmp,str(index),fill = (255,0,0), font=font_definido)
+        etiquetar.text(centroide_tmp,str(index),fill = (255,255,255), font=font_definido)
         index +=1
     imagen_color_etiq.save(path_static + 'predColorEtiq' +str(contador)+'.png')
     imagen_color_etiq.save(path_coloreadas + 'predColorEtiq' +str(contador)+'.png')
